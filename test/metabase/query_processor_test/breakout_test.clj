@@ -260,7 +260,7 @@
            :breakout     [(ql/binning-strategy (ql/field-literal (data/format-name :latitude) :type/Float) :num-bins 20)]}})
 
 ;; Binning should be allowed on nested queries that have result metadata
-(datasets/expect-with-engines (non-timeseries-engines-with-feature :binning)
+(datasets/expect-with-engines (non-timeseries-engines-with-feature :binning :nested-queries)
   [[10.0 1] [32.0 4] [34.0 57] [36.0 29] [40.0 9]]
   (tt/with-temp Card [card {:dataset_query {:database (data/id)
                                             :type :query
@@ -272,7 +272,7 @@
          (format-rows-by [(partial u/round-to-decimals 1) int]))))
 
 ;; Binning is not supported when there is no fingerprint to determine boundaries
-(datasets/expect-with-engines (non-timeseries-engines-with-feature :binning)
+(datasets/expect-with-engines (non-timeseries-engines-with-feature :binning :nested-queries)
   Exception
   (tt/with-temp Card [card {:dataset_query {:database (data/id)
                                             :type :query
