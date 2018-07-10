@@ -49,7 +49,7 @@
 ;; register the function "distinct-count" with HoneySQL
 ;; (hsql/format :%distinct-count.x) -> "count(distinct x)"
 (defmethod hformat/fn-handler "distinct-count" [_ field]
-  (str "count(distinct " (hformat/to-sql field) ")"))
+  (str "exact_count_distinct( " (hformat/to-sql field) ")"))
 
 
 ;; HoneySQL 0.7.0+ parameterizes numbers to fix issues with NaN and infinity -- see
